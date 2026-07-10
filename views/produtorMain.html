@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Feito A Mão — Painel do Produtor. Gerencie seus pedidos recebidos." />
+  <title>Painel do Produtor — Feito A Mão</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+  <!-- Skip link para navegação por teclado -->
+  <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo principal</a>
+
+  <!-- Menu / Nav -->
+  <header class="header" role="banner">
+    <nav class="nav" aria-label="Navegação principal">
+      <a class="nav__logo" href="escolhaPerfil.html" aria-label="Feito A Mão — Página inicial">
+        <span aria-hidden="true"><i class="bi bi-bag-fill"></i></span> Feito A Mão
+      </a>
+
+      <!-- Hambúrguer (mobile) -->
+      <button
+        class="nav__toggle"
+        id="nav-toggle"
+        aria-controls="nav-menu"
+        aria-expanded="false"
+        aria-label="Abrir menu de navegação"
+      >
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Links de navegação -->
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="#conteudo-principal"><i class="bi bi-house"></i> Início</a></li>
+        <li><a href="#pedidos-grid"><i class="bi bi-box"></i> Meus Pedidos</a></li>
+        <li><a href="#"><i class="bi bi-graph-up"></i> Relatórios</a></li>
+        <li><a href="editarProdutor.html"><i class="bi bi-person"></i> Perfil</a></li>
+        <li><a href="#" id="btn-sair"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+      </ul>
+
+      <!-- Indicador de painel -->
+      <div class="nav__acoes">
+        <a href="formularioProduto.html">
+          <span class="btn-carrinho" aria-label="Painel do produtor">
+            <i class="bi bi-plus"></i> Adicionar Novo Produto
+          </span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO DO PRODUTOR -->
+  <section class="hero hero--produtor" aria-label="Painel do produtor">
+    <h1 class="hero__subtitulo">
+      Gerencie seus pedidos recebidos, acompanhe o status e atualize suas entregas.
+    </h1>
+    <div class="hero__meta">
+      <span aria-hidden="true"><i class="bi bi-envelope"></i></span>
+      <span id="email-produtor" aria-label="E-mail do produtor"></span>
+    </div>
+
+    <!-- Busca de pedidos -->
+    <div class="busca-wrapper" role="search" style="margin-top: 1.5rem;">
+      <label for="busca-input">Buscar pedidos por produto</label>
+      <input
+        type="search"
+        id="busca-input"
+        class="busca-input"
+        placeholder="Buscar pedidos por produto..."
+        aria-label="Buscar pedidos"
+        autocomplete="off"
+      />
+      <button class="busca-btn" id="busca-btn" aria-label="Realizar busca"><i class="bi bi-search"></i></button>
+    </div>
+
+  </section>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="main" id="conteudo-principal">
+
+    <!-- Cards de resumo estatístico -->
+    <h2 class="secao-titulo"><i class="bi bi-graph-up"></i> Resumo</h2>
+    <div class="resumo-grid" aria-label="Resumo dos pedidos" role="region">
+      <div class="resumo-card resumo-card--destaque">
+        <span class="resumo-card__icone" aria-hidden="true"><i class="bi bi-box"></i></span>
+        <span class="resumo-card__label">Total de pedidos</span>
+        <span class="resumo-card__valor" id="resumo-total" aria-live="polite">—</span>
+      </div>
+      <div class="resumo-card">
+        <span class="resumo-card__icone" aria-hidden="true"><i class="bi bi-clock"></i></span>
+        <span class="resumo-card__label">Pendentes</span>
+        <span class="resumo-card__valor" id="resumo-pendentes" aria-live="polite">—</span>
+      </div>
+      <div class="resumo-card">
+        <span class="resumo-card__icone" aria-hidden="true"><i class="bi bi-egg"></i></span>
+        <span class="resumo-card__label">Em preparo</span>
+        <span class="resumo-card__valor" id="resumo-preparando" aria-live="polite">—</span>
+      </div>
+      <div class="resumo-card resumo-card--verde">
+        <span class="resumo-card__icone" aria-hidden="true"><i class="bi bi-check2-circle"></i></span>
+        <span class="resumo-card__label">Entregues</span>
+        <span class="resumo-card__valor" id="resumo-entregues" aria-live="polite">—</span>
+      </div>
+    </div>
+
+    <!-- Título da seção de pedidos -->
+    <h2 class="secao-titulo"><i class="bi bi-list-task"></i> Pedidos Recebidos</h2>
+
+    <!-- Filtros por status -->
+    <nav aria-label="Filtrar pedidos por status">
+      <div class="filtros" id="filtros-status" role="group" aria-label="Status dos pedidos">
+        <button class="filtro-btn ativo" data-status="Todos" aria-pressed="true">Todos</button>
+        <button class="filtro-btn" data-status="pendente"   aria-pressed="false"><i class="bi bi-clock"></i> Pendentes</button>
+        <button class="filtro-btn" data-status="preparando" aria-pressed="false"><i class="bi bi-egg"></i> Em preparo</button>
+        <button class="filtro-btn" data-status="entregue"   aria-pressed="false"><i class="bi bi-check2-circle"></i> Entregues</button>
+        <button class="filtro-btn" data-status="cancelado"  aria-pressed="false"><i class="bi bi-x-circle"></i> Cancelados</button>
+      </div>
+    </nav>
+
+    <!-- Barra de resultados -->
+    <div class="barra-resultados">
+      <span id="resultado-count" aria-live="polite" aria-atomic="true"></span>
+    </div>
+
+    <!-- Grid de pedidos (renderizado via JS) -->
+    <section
+      id="pedidos-grid"
+      class="produtos-grid"
+      aria-label="Lista de pedidos recebidos"
+      aria-live="polite"
+    >
+      <!-- Cards renderizados dinamicamente via JS -->
+    </section>
+
+    <h2 class="secao-titulo"><i class="bi bi-box"></i> Meus Produtos</h2>
+      <section
+        id="produtos-produtor-grid"
+        class="produtos-grid"
+        aria-label="Lista de produtos cadastrados pelo produtor"
+        aria-live="polite"
+      ></section>
+      
+  </main>
+
+  <!--  TOASTS / FEEDBACK  -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+  <!--  FOOTER  -->
+  <footer class="footer" role="contentinfo">
+    <p>
+      &copy; 2026 <strong>Feito A Mão</strong>
+    </p>
+  </footer>
+
+  <!-- Script compartilhado -->
+  <script src="../js/nav.js"></script>
+  <script src="../api/Pedido.js"></script>
+  <script src="../api/AppProdutor.js"></script>
+</body>
+</html>

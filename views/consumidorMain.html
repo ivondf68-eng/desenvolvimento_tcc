@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Feito A Mão — Marketplace de produtos artesanais de microempreendedores locais." />
+  <title>Feito A Mão — Produtos Artesanais</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+  <!-- Skip link para navegação por teclado -->
+  <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo principal</a>
+
+  <!--  HEADER / NAV  -->
+  <header class="header" role="banner">
+    <nav class="nav" aria-label="Navegação principal">
+      <a class="nav__logo" href="escolhaPerfil.html" aria-label="Feito A Mão — Página inicial">
+        <span aria-hidden="true"><i class="bi bi-bag-fill"></i></span> Feito A Mão
+      </a>
+
+      <!-- Hambúrguer (mobile) -->
+      <button
+        class="nav__toggle"
+        id="nav-toggle"
+        aria-controls="nav-menu"
+        aria-expanded="false"
+        aria-label="Abrir menu de navegação"
+      >
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Links de navegação -->
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="#conteudo-principal"><i class="bi bi-house"></i> Início</a></li>
+        <li><a href="produtores.html"><i class="bi bi-people"></i> Produtores</a></li>
+        <li><a href="meusPedidos.html"><i class="bi bi-bag"></i> Meus Pedidos</a></li>
+        <li><a href="editarConsumidor.html"><i class="bi bi-person-circle"></i> Perfil</a></li>
+        <li><a href="#" id="btn-sair"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+      </ul>
+
+      <!-- Botão carrinho -->
+      <div class="nav__acoes">
+        <button class="btn-carrinho" id="btn-abrir-carrinho" aria-label="Ver carrinho de compras">
+          <i class="bi bi-cart"></i> Carrinho
+          <span class="carrinho-badge" id="carrinho-badge" aria-label="itens no carrinho">0</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!--  HERO / BANNER  -->
+  <section class="hero" aria-label="Apresentação">
+    <p class="hero__subtitulo">
+      Descubra produtos artesanais de microempreendedores da sua região.
+      Direto de quem faz para quem aprecia.
+    </p>
+
+    <!-- Campo de busca -->
+    <div class="busca-wrapper" role="search">
+      <label for="busca-input">Buscar produtos ou produtores</label>
+      <input
+        type="search"
+        id="busca-input"
+        class="busca-input"
+        placeholder="Buscar produtos ou produtores..."
+        aria-label="Buscar produtos ou produtores"
+        autocomplete="off"
+      />
+      <button class="busca-btn" id="busca-btn" aria-label="Realizar busca"><i class="bi bi-search"></i></button>
+    </div>
+  </section>
+
+  <!--  CONTEÚDO PRINCIPAL  -->
+  <main class="main" id="conteudo-principal">
+
+    <!-- Título da seção -->
+    <h2 class="secao-titulo"><i class="bi bi-basket2-fill"></i> Nossos Produtos</h2>
+
+    <!-- Filtros de categoria (preenchidos via JS) -->
+    <nav aria-label="Filtrar por categoria">
+      <div class="filtros" id="filtros" role="group" aria-label="Categorias de produtos">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+    </nav>
+
+    <!-- Barra de resultados + ordenação -->
+    <div class="barra-resultados">
+      <span id="resultado-count" aria-live="polite" aria-atomic="true"></span>
+      <label for="ordenar" class="sr-only">Ordenar por</label>
+      <select id="ordenar" class="ordenar-select" aria-label="Ordenar produtos">
+        <option value="padrao">Ordenar por: Padrão</option>
+        <option value="destaque"> <i class="bi bi-star-fill"></i> Destaques primeiro</option>
+        <option value="preco-asc">Preço: menor → maior</option>
+        <option value="preco-desc">Preço: maior → menor</option>
+        <option value="nome">Nome A–Z</option>
+      </select>
+    </div>
+
+    <!-- Grid de produtos (preenchido via JS) -->
+    <section
+      id="produtos-grid"
+      class="produtos-grid"
+      aria-label="Lista de produtos artesanais"
+      aria-live="polite"
+    >
+      <!-- Cards renderizados dinamicamente via JS -->
+    </section>
+
+  </main>
+
+  <!-- TOASTS / FEEDBACK -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+  <aside id="carrinho-drawer" class="carrinho-drawer" aria-label="Carrinho de pedidos">
+    <div class="carrinho-drawer__cabeca">
+      <h2>Seu carrinho</h2>
+      <button class="modal__fechar" id="fechar-carrinho" aria-label="Fechar carrinho">✕</button>
+    </div>
+    <div id="carrinho-grid" class="carrinho-drawer__lista"></div>
+    <div class="carrinho-drawer__rodape">
+      <p id="carrinho-resumo">0 item</p>
+      <strong id="carrinho-total">R$ 0,00</strong>
+      <button class="btn-adicionar" id="finalizar-pedido">Finalizar pedido</button>
+    </div>
+  </aside>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <p>
+      &copy; 2026 <strong>Feito A Mão</strong>
+    </p>
+  </footer>
+
+  <!-- Script principal -->
+   <script src="../js/nav.js"></script>
+  <script src="../api/Pedido.js"></script>
+  <script src="../api/AppConsumidor.js"></script>
+</body>
+</html>

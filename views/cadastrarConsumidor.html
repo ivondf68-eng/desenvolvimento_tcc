@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Cadastrar Perfil de Consumidor — Feito A Mão</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#form-consumidor">Ir direto para o formulário</a>
+
+  <header class="cabecalho" role="banner">
+    <p class="cabecalho__marca"><i class="bi bi-bag-fill"></i> Feito A Mão</p>
+    <p class="cabecalho__desc">Marketplace de produtos artesanais alimentícios para microempreendedores locais.</p>
+  </header>
+
+  <main class="pagina-login" id="conteudo-principal">
+    <div class="card-login" role="region" aria-labelledby="titulo-consumidor">
+
+      <h1 class="card-login__titulo" id="titulo-consumidor">Cadastrar Perfil de Consumidor</h1>
+      <p class="card-login__dica">Preencha os campos abaixo.</p>
+
+      <form class="form-login" id="form-consumidor" method="post"
+            action="../index.php?acao=salvar_consumidor"
+            enctype="multipart/form-data"
+            aria-label="Formulário de cadastro de consumidor">
+
+        <!-- id_usuario vindo da sessão via JS -->
+        <input type="hidden" id="id_usuario" name="id_usuario" value="">
+
+        <fieldset>
+          <legend>Dados Pessoais</legend>
+
+          <div class="campo">
+            <div class="campo__rotulo-grupo">
+              <label class="campo__rotulo" for="nome">Nome</label>
+            </div>
+            <input class="campo__entrada" type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+          </div>
+
+          <div class="campo">
+            <div class="campo__rotulo-grupo">
+              <label class="campo__rotulo" for="telefone">Telefone</label>
+            </div>
+            <input class="campo__entrada" type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone">
+          </div>
+
+          <div class="campo">
+            <div class="campo__rotulo-grupo">
+              <label class="campo__rotulo" for="foto_perfil">Foto de Perfil</label>
+            </div>
+            <input class="campo__entrada" type="file" id="foto_perfil" name="foto_perfil" accept="image/*">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Endereço Residencial</legend>
+
+          <div class="campo">
+            <div class="campo__rotulo-grupo">
+              <label class="campo__rotulo" for="logradouro">Logradouro</label>
+            </div>
+            <input class="campo__entrada" type="text" id="logradouro" name="logradouro" placeholder="Digite o logradouro" required>
+          </div>
+
+          <div class="campo">
+            <div class="campo__rotulo-grupo">
+              <label class="campo__rotulo" for="numero">Número</label>
+            </div>
+            <input class="campo__entrada" type="text" id="numero" name="numero" placeholder="Digite o número">
+          </div>
+
+          <div class="campo">
+            <div class="campo__rotulo-grupo">
+              <label class="campo__rotulo" for="bairro">Bairro</label>
+            </div>
+            <input class="campo__entrada" type="text" id="bairro" name="bairro" placeholder="Digite o bairro">
+          </div>
+
+          <div class="campo">
+            <div class="campo__rotulo-grupo">
+              <label class="campo__rotulo" for="complemento">Complemento</label>
+            </div>
+            <input class="campo__entrada" type="text" id="complemento" name="complemento" placeholder="Digite o complemento">
+          </div>
+
+          <div class="campo">
+            <div class="campo__rotulo-grupo">
+              <label class="campo__rotulo" for="estado">Estado</label>
+            </div>
+            <select class="campo__entrada" id="estado" name="estado" required>
+              <option value="">Selecione um estado</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <div class="campo__rotulo-grupo">
+              <label class="campo__rotulo" for="cidade">Cidade</label>
+            </div>
+            <select class="campo__entrada" id="cidade" name="cidade" required disabled>
+              <option value="">Selecione um estado primeiro</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <p id="mensagem"></p>
+
+        <button class="btn-entrar" type="submit" id="btn-entrar">
+          <span class="btn-entrar__texto" aria-hidden="true">Cadastrar</span>
+        </button>
+      </form>
+
+    </div>
+  </main>
+
+  <footer class="rodape" role="contentinfo">
+    <p>&copy; 2026 <strong>Feito A Mão</strong></p>
+  </footer>
+
+  <script src="../api_gov/api_gov.js"></script>
+  <script>
+    // Preenche o id_usuario a partir da URL (?id_usuario=X)
+    const params = new URLSearchParams(window.location.search);
+    const idUsuario = params.get('id_usuario') || '';
+    document.getElementById('id_usuario').value = idUsuario;
+  </script>
+
+</body>
+</html>

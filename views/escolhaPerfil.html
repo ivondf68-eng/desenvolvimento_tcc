@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Escolha o perfil de acesso para entrar no Feito A Mão." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>Feito A Mão</title>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo principal</a>
+
+  <header class="hero hero--perfil" role="banner">
+    <div class="hero__conteudo">
+      <h1 class="hero__titulo">Feito A Mão</h1>
+      <p class="hero__subtitulo">Escolha o perfil com o qual deseja acessar a plataforma.</p>
+    </div>
+  </header>
+
+  <main class="main perfil-choice" id="conteudo-principal">
+    <section class="perfil-card" aria-labelledby="perfil-title">
+      <h2 id="perfil-title" class="perfil-card__title">Com qual Perfil seu você deseja entrar? Selecione!</h2>
+      <label class="perfil-card__label" for="perfil">Perfil</label>
+      <select id="perfil" class="perfil-select" aria-label="Selecionar perfil de acesso">
+        <option value="">Selecione uma opção</option>
+        <option value="consumidor">Consumidor</option>
+        <option value="produtor">Produtor</option>
+      </select>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <p>&copy; 2026 <strong>Feito A Mão</strong></p>
+  </footer>
+
+  <script>
+    const selectPerfil = document.getElementById('perfil');
+
+    // Carrega apenas os perfis que este usuário tem cadastrado
+    async function carregarPerfis() {
+      try {
+        const resp  = await fetch('../index.php?acao=perfis_disponiveis');
+        const dados = await resp.json();
+
+        if (!dados.consumidor && !dados.produtor) {
+          // Usuário sem perfis: redireciona para completar o cadastro
+          window.location.href = '../index.html';
+          return;
+        }
+
+        // Remove opções que o usuário não possui
+        if (!dados.consumidor) {
+          selectPerfil.querySelector('option[value="consumidor"]')?.remove();
+        }
+        if (!dados.produtor) {
+          selectPerfil.querySelector('option[value="produtor"]')?.remove();
+        }
+
+        // Se só tem um perfil, redireciona automaticamente
+        if (dados.consumidor && !dados.produtor) {
+          window.location.href = 'consumidorMain.html';
+          return;
+        }
+        if (dados.produtor && !dados.consumidor) {
+          window.location.href = 'produtorMain.html';
+          return;
+        }
+      } catch {
+        // Falha silenciosa: mantém as duas opções
+      }
+    }
+
+    carregarPerfis();
+
+    if (selectPerfil) {
+      selectPerfil.addEventListener('change', (event) => {
+        const perfil = event.target.value;
+        if (perfil === 'consumidor') window.location.href = 'consumidorMain.html';
+        if (perfil === 'produtor')   window.location.href = 'produtorMain.html';
+      });
+    }
+  </script>
+</body>
+</html>
